@@ -1,3 +1,9 @@
+// let dynamicRoutes = () => {
+//   return new Promise(resolve => {
+//     resolve(blogs.map(blog => `blog/${blog.id}`))
+//   })
+// }
+
 export default {
   head: {
     title: 'frontend',
@@ -10,25 +16,28 @@ export default {
   },
 
   // Global CSS (https://go.nuxtjs.dev/config-css)
-  css: ['ant-design-vue/dist/antd.css'],
+  css: ['ant-design-vue/dist/antd.css', '~assets/global.scss'],
+
+  generate: {
+    interval: 2000,
+    // routes: dynamicRoutes
+  },
 
   // Plugins to run before rendering page (https://go.nuxtjs.dev/config-plugins)
-  plugins: ['@/plugins/antd-ui'],
+  plugins: ['@/plugins/antd-ui', '@/plugins/axios.js'],
 
   // Auto import components (https://go.nuxtjs.dev/config-components)
-  components: true,
+  components: false,
 
   // Modules for dev and build (recommended) (https://go.nuxtjs.dev/config-modules)
-  buildModules: [
-    '@nuxt/typescript-build',
-  ],
+  buildModules: ['@nuxtjs/composition-api', '@nuxt/typescript-build'],
 
   // Modules (https://go.nuxtjs.dev/config-modules)
-  modules: [
-    '@nuxtjs/axios',
-  ],
+  modules: ['@nuxtjs/axios'],
 
   axios: {},
 
-  build: {},
+  build: {
+    transpile: ['ant-design-vue', 'vuex-composition-helpers'],
+  },
 }
